@@ -1,0 +1,45 @@
+# requirements.txt
+# Core Flask dependencies
+Flask
+Flask-CORS
+
+# Web scraping and requests
+requests
+beautifulsoup4
+lxml
+
+# RSS and news parsing
+feedparser
+# Date and time handling
+python-dateutil
+# UUID generation (built-in but ensuring compatibility)
+uuid
+
+
+# Type hints support
+typing-extensions
+# Development and testing dependencies
+pytest
+pytest-flask
+
+# Optional: For production deployment
+gunicorn
+python-dotenv
+
+# Optional: For enhanced security
+werkzeug
+
+# Optional: For rate limiting
+Flask-Limiter
+
+# Optional: For API documentation
+flasgger
+
+# Optional: For logging
+structlog
+
+# Optional: For validation
+marshmallow
+
+# Optional: For scheduling tasks
+APScheduler

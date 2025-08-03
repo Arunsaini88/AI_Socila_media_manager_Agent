@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Social Media Manager - Test Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .section-content {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4ecdc4;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .result-container h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .result-container pre {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.4;
+            border: 1px solid #e0e0e0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-connected {
+            background: #4caf50;
+        }
+
+        .status-disconnected {
+            background: #f44336;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .post-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-type {
+            background: #4ecdc4;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .post-content {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .post-hashtags {
+            color: #4ecdc4;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .api-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #4ecdc4;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="api-status">
+        <div id="connection-status">
+            <span class="status-indicator status-disconnected"></span>
+            Checking API connection...
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>AI Social Media Manager</h1>
+            <p>Test Interface for Backend API</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Business Analysis Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Business Analysis</h2>
+                    <p>Analyze a business website to extract profile information</p>
+                </div>
+                <div class="section-content">
+                    <div class="form-group">
+                        <label for="website-url">Website URL:</label>
+                        <input type="url" id="website-url" placeholder="https://example-business.com" value="https://www.planetfitness.com">
+                    </div>
+                    <button class="btn" onclick="analyzeWebsite()">Analyze Website</button>
+                    <div class="loading" id="analyze-loading">Analyzing website...</div>
+                    <div class="result-container" id="analyze-result" style="display: none;">
+                        <h3>Business Profile:</h3>
+                        <pre id="analyze-output"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Industry News Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Industry News Analysis</h2>
+                    <p>Get current industry trends and insights</p>
+                </div>
+                <div class="section-content">
+                    <div class="form-group">
+                        <label for="industry-select">Industry:</label>
+                        <select id="industry-select">
+                            <option value="fitness">Fitness</option>
+                            <option value="beauty">Beauty</option>
+                            <option value="food">Food & Restaurant</option>
+                            <option value="retail">Retail</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="general">General Business</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="keywords">Additional Keywords (comma-separated):</label>
+                        <input type="text" id="keywords" placeholder="gym, workout, training">
+                    </div>
+                    <button class="btn" onclick="getIndustryNews()">Get Industry News</button>
+                    <div class="loading" id="news-loading">Fetching industry news...</div>
+                    <div class="result-container" id="news-result" style="display: none;">
+                        <h3>Industry Insights:</h3>
+                        <pre id="news-output"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Generation Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Content Generation</h2>
+                    <p>Generate AI-powered social media posts</p>
+                </div>
+                <div class="section-content">
+                    <div class="grid">
+                        <div>
+                            <div class="form-group">
+                                <label for="business-id">Business ID:</label>
+                                <input type="text" id="business-id" placeholder="Enter business ID from analysis">
+                            </div>
+                            <div class="form-group">
+                                <label for="tone-select">Tone of Voice:</label>
+                                <select id="tone-select">
+                                    <option value="professional">Professional</option>
+                                    <option value="friendly" selected>Friendly</option>
+                                    <option value="casual">Casual</option>
+                                    <option value="premium">Premium</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="post-frequency">Posts per Week:</label>
+                                <select id="post-frequency">
+                                    <option value="1">1 post</option>
+                                    <option value="2">2 posts</option>
+                                    <option value="3" selected>3 posts</option>
+                                    <option value="4">4 posts</option>
+                                    <option value="5">5 posts</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="post-types">Post Types:</label>
+                                <select id="post-types" multiple>
+                                    <option value="promo" selected>Promotional</option>
+                                    <option value="tip" selected>Tips & Advice</option>
+                                    <option value="update">Updates</option>
+                                    <option value="insight" selected>Industry Insights</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="generateContent()">Generate Posts</button>
+                    <div class="loading" id="content-loading">Generating content...</div>
+                    <div class="result-container" id="content-result" style="display: none;">
+                        <h3>Generated Posts:</h3>
+                        <div id="posts-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facebook Connection Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Facebook Connection</h2>
+                    <p>Connect to Facebook for post publishing (Mock Mode)</p>
+                </div>
+                <div class="section-content">
+                    <div class="form-group">
+                        <label for="access-token">Facebook Access Token:</label>
+                        <input type="text" id="access-token" placeholder="mock-access-token" value="mock-user-access-token">
+                    </div>
+                    <button class="btn" onclick="connectFacebook()">Connect Facebook Page</button>
+                    <div class="loading" id="facebook-loading">Connecting to Facebook...</div>
+                    <div class="result-container" id="facebook-result" style="display: none;">
+                        <h3>Facebook Connection:</h3>
+                        <pre id="facebook-output"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post Publishing Section -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Post Publishing</h2>
+                    <p>Publish generated posts to Facebook</p>
+                </div>
+                <div class="section-content">
+                    <div class="grid">
+                        <div>
+                            <div class="form-group">
+                                <label for="publish-post-id">Post ID to Publish:</label>
+                                <input type="text" id="publish-post-id" placeholder="Enter post ID from generated content">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <label for="page-id">Facebook Page ID:</label>
+                                <input type="text" id="page-id" placeholder="123456789" value="123456789">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="page-access-token">Page Access Token:</label>
+                        <input type="text" id="page-access-token" placeholder="mock-page-token" value="mock-page-token-123">
+                    </div>
+                    <button class="btn" onclick="publishPost()">Publish to Facebook</button>
+                    <div class="loading" id="publish-loading">Publishing post...</div>
+                    <div class="result-container" id="publish-result" style="display: none;">
+                        <h3>Publication Result:</h3>
+                        <pre id="publish-output"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        let currentBusinessId = '';
+        let generatedPosts = [];
+
+        // Check API connection on load
+        window.addEventListener('load', checkAPIConnection);
+
+        async function checkAPIConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateConnectionStatus(true, 'API Connected');
+                } else {
+                    updateConnectionStatus(false, 'API Error');
+                }
+            } catch (error) {
+                updateConnectionStatus(false, 'API Disconnected');
+            }
+        }
+
+        function updateConnectionStatus(connected, message) {
+            const statusEl = document.getElementById('connection-status');
+            const indicator = statusEl.querySelector('.status-indicator');
+            
+            if (connected) {
+                indicator.className = 'status-indicator status-connected';
+                statusEl.innerHTML = `<span class="status-indicator status-connected"></span>${message}`;
+            } else {
+                indicator.className = 'status-indicator status-disconnected';
+                statusEl.innerHTML = `<span class="status-indicator status-disconnected"></span>${message}`;
+            }
+        }
+
+        async function analyzeWebsite() {
+            const url = document.getElementById('website-url').value;
+            
+            if (!url) {
+                alert('Please enter a website URL');
+                return;
+            }
+
+            showLoading('analyze-loading');
+            hideResult('analyze-result');
+
+            try {
+                const response = await fetch(`${API_BASE}/business/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ website_url: url })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentBusinessId = data.business_id;
+                    document.getElementById('business-id').value = currentBusinessId;
+                    document.getElementById('analyze-output').textContent = JSON.stringify(data, null, 2);
+                    showResult('analyze-result');
+                } else {
+                    document.getElementById('analyze-output').textContent = `Error: ${data.error}`;
+                    showResult('analyze-result');
+                }
+            } catch (error) {
+                document.getElementById('analyze-output').textContent = `Error: ${error.message}`;
+                showResult('analyze-result');
+            } finally {
+                hideLoading('analyze-loading');
+            }
+        }
+
+        async function getIndustryNews() {
+            const industry = document.getElementById('industry-select').value;
+            const keywordsInput = document.getElementById('keywords').value;
+            const keywords = keywordsInput ? keywordsInput.split(',').map(k => k.trim()) : [];
+
+            showLoading('news-loading');
+            hideResult('news-result');
+
+            try {
+                const response = await fetch(`${API_BASE}/news/analyze`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ industry, keywords })
+                });
+
+                const data = await response.json();
+                document.getElementById('news-output').textContent = JSON.stringify(data, null, 2);
+                showResult('news-result');
+            } catch (error) {
+                document.getElementById('news-output').textContent = `Error: ${error.message}`;
+                showResult('news-result');
+            } finally {
+                hideLoading('news-loading');
+            }
+        }
+
+        async function generateContent() {
+            const businessId = document.getElementById('business-id').value;
+            
+            if (!businessId) {
+                alert('Please analyze a business first or enter a business ID');
+                return;
+            }
+
+            const tone = document.getElementById('tone-select').value;
+            const frequency = parseInt(document.getElementById('post-frequency').value);
+            const postTypesEl = document.getElementById('post-types');
+            const postTypes = Array.from(postTypesEl.selectedOptions).map(option => option.value);
+
+            showLoading('content-loading');
+            hideResult('content-result');
+
+            try {
+                const response = await fetch(`${API_BASE}/content/generate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        business_id: businessId,
+                        post_preferences: {
+                            tone,
+                            frequency,
+                            post_types: postTypes
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    generatedPosts = data.posts;
+                    displayGeneratedPosts(data.posts);
+                    showResult('content-result');
+                } else {
+                    document.getElementById('posts-container').innerHTML = `<p>Error: ${data.error}</p>`;
+                    showResult('content-result');
+                }
+            } catch (error) {
+                document.getElementById('posts-container').innerHTML = `<p>Error: ${error.message}</p>`;
+                showResult('content-result');
+            } finally {
+                hideLoading('content-loading');
+            }
+        }
+
+        function displayGeneratedPosts(posts) {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+
+            posts.forEach((post, index) => {
+                const postCard = document.createElement('div');
+                postCard.className = 'post-card';
+                postCard.innerHTML = `
+                    <div class="post-type">${post.post_type}</div>
+                    <div class="post-content">${post.content}</div>
+                    <div class="post-hashtags">${post.hashtags.join(' ')}</div>
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #666;">
+                        <strong>Post ID:</strong> ${post.id}<br>
+                        <strong>Best Time:</strong> ${post.best_time_to_post}<br>
+                        <strong>Tone:</strong> ${post.tone}
+                        <button class="btn" style="margin-top: 10px; padding: 5px 15px; font-size: 12px;" onclick="selectPostForPublishing('${post.id}')">
+                            Select for Publishing
+                        </button>
+                    </div>
+                `;
+                container.appendChild(postCard);
+            });
+        }
+
+        function selectPostForPublishing(postId) {
+            document.getElementById('publish-post-id').value = postId;
+            alert('Post selected for publishing! Scroll down to the Publishing section.');
+        }
+
+        async function connectFacebook() {
+            const accessToken = document.getElementById('access-token').value;
+            
+            if (!accessToken) {
+                alert('Please enter an access token');
+                return;
+            }
+
+            showLoading('facebook-loading');
+            hideResult('facebook-result');
+
+            try {
+                const response = await fetch(`${API_BASE}/facebook/connect`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ access_token: accessToken })
+                });
+
+                const data = await response.json();
+                
+                if (data.success && data.connection.page) {
+                    document.getElementById('page-id').value = data.connection.page.id;
+                    document.getElementById('page-access-token').value = data.connection.page.access_token;
+                }
+                
+                document.getElementById('facebook-output').textContent = JSON.stringify(data, null, 2);
+                showResult('facebook-result');
+            } catch (error) {
+                document.getElementById('facebook-output').textContent = `Error: ${error.message}`;
+                showResult('facebook-result');
+            } finally {
+                hideLoading('facebook-loading');
+            }
+        }
+
+        async function publishPost() {
+            const postId = document.getElementById('publish-post-id').value;
+            const pageId = document.getElementById('page-id').value;
+            const pageAccessToken = document.getElementById('page-access-token').value;
+            
+            if (!postId || !pageId || !pageAccessToken) {
+                alert('Please fill in all fields for publishing');
+                return;
+            }
+
+            showLoading('publish-loading');
+            hideResult('publish-result');
+
+            try {
+                const response = await fetch(`${API_BASE}/posts/${postId}/publish`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        page_id: pageId,
+                        access_token: pageAccessToken
+                    })
+                });
+
+                const data = await response.json();
+                document.getElementById('publish-output').textContent = JSON.stringify(data, null, 2);
+                showResult('publish-result');
+            } catch (error) {
+                document.getElementById('publish-output').textContent = `Error: ${error.message}`;
+                showResult('publish-result');
+            } finally {
+                hideLoading('publish-loading');
+            }
+        }
+
+        function showLoading(elementId) {
+            document.getElementById(elementId).style.display = 'block';
+        }
+
+        function hideLoading(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        function showResult(elementId) {
+            document.getElementById(elementId).style.display = 'block';
+        }
+
+        function hideResult(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+    </script>
+</body>
+</html>

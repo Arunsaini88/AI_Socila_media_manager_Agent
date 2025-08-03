@@ -1,0 +1,155 @@
+{
+  "summary": {
+    "total_tests": 24,
+    "passed": 24,
+    "failed": 0,
+    "success_rate": 100.0,
+    "test_date": "2025-08-03T23:06:18.954362"
+  },
+  "results": [
+    {
+      "test": "Health Check",
+      "success": true,
+      "message": "API is healthy and responding",
+      "timestamp": "2025-08-03T23:04:23.184890"
+    },
+    {
+      "test": "Business Analysis - https://www.planetfitness.com",
+      "success": true,
+      "message": "Business: Planetfitness, Industry: general",
+      "timestamp": "2025-08-03T23:04:25.631161"
+    },
+    {
+      "test": "Business Analysis - https://example.com",
+      "success": true,
+      "message": "Business: Example Domain, Industry: general",
+      "timestamp": "2025-08-03T23:04:48.557887"
+    },
+    {
+      "test": "Get Business Profile",
+      "success": true,
+      "message": "Retrieved profile for business ID: 838c42ee-b630-49ca-91db-fa6844241774",
+      "timestamp": "2025-08-03T23:04:50.606989"
+    },
+    {
+      "test": "Industry News - fitness",
+      "success": true,
+      "message": "Retrieved 5 news insights",
+      "timestamp": "2025-08-03T23:05:35.297119"
+    },
+    {
+      "test": "Industry News - beauty",
+      "success": true,
+      "message": "Retrieved 5 news insights",
+      "timestamp": "2025-08-03T23:05:39.285818"
+    },
+    {
+      "test": "Industry News - food",
+      "success": true,
+      "message": "Retrieved 5 news insights",
+      "timestamp": "2025-08-03T23:05:43.127403"
+    },
+    {
+      "test": "Industry News - general",
+      "success": true,
+      "message": "Retrieved 5 news insights",
+      "timestamp": "2025-08-03T23:05:47.896157"
+    },
+    {
+      "test": "Content Generation - friendly",
+      "success": true,
+      "message": "Generated 3 posts",
+      "timestamp": "2025-08-03T23:05:50.002418"
+    },
+    {
+      "test": "Content Generation - professional",
+      "success": true,
+      "message": "Generated 2 posts",
+      "timestamp": "2025-08-03T23:05:52.097968"
+    },
+    {
+      "test": "Content Generation - casual",
+      "success": true,
+      "message": "Generated 1 posts",
+      "timestamp": "2025-08-03T23:05:54.164516"
+    },
+    {
+      "test": "Weekly Schedule - 3 posts",
+      "success": true,
+      "message": "Created schedule with 3 scheduled days",
+      "timestamp": "2025-08-03T23:05:56.253745"
+    },
+    {
+      "test": "Weekly Schedule - 2 posts",
+      "success": true,
+      "message": "Created schedule with 2 scheduled days",
+      "timestamp": "2025-08-03T23:05:58.346653"
+    },
+    {
+      "test": "Get Schedule",
+      "success": true,
+      "message": "Retrieved schedule successfully",
+      "timestamp": "2025-08-03T23:06:00.385553"
+    },
+    {
+      "test": "Get Business Posts",
+      "success": true,
+      "message": "Retrieved 6 posts",
+      "timestamp": "2025-08-03T23:06:02.428072"
+    },
+    {
+      "test": "Get Scheduled Posts",
+      "success": true,
+      "message": "Retrieved 5 scheduled posts",
+      "timestamp": "2025-08-03T23:06:04.457072"
+    },
+    {
+      "test": "Update Post",
+      "success": true,
+      "message": "Updated post feeb5c16-db48-444a-9d44-74248ab7f678",
+      "timestamp": "2025-08-03T23:06:06.484062"
+    },
+    {
+      "test": "Facebook Connection",
+      "success": true,
+      "message": "Connected to page: Test Business Page",
+      "timestamp": "2025-08-03T23:06:08.513787"
+    },
+    {
+      "test": "Get Facebook Pages",
+      "success": true,
+      "message": "Retrieved 2 pages",
+      "timestamp": "2025-08-03T23:06:10.543899"
+    },
+    {
+      "test": "Publish Post",
+      "success": true,
+      "message": "Published successfully: https://facebook.com/mock-page/123456789_1b74cca266",
+      "timestamp": "2025-08-03T23:06:12.606079"
+    },
+    {
+      "test": "Workflow Step 1 - Business Analysis",
+      "success": true,
+      "message": "Business analyzed successfully",
+      "timestamp": "2025-08-03T23:06:14.833721"
+    },
+    {
+      "test": "Workflow Step 2 - Content Generation",
+      "success": true,
+      "message": "Content generated successfully",
+      "timestamp": "2025-08-03T23:06:16.907913"
+    },
+    {
+      "test": "Workflow Step 3 - Publish Post",
+      "success": true,
+      "message": "Post published successfully",
+      "timestamp": "2025-08-03T23:06:18.952891"
+    },
+    {
+      "test": "Complete Workflow",
+      "success": true,
+      "message": "\u2728 End-to-end workflow completed successfully!",
+      "timestamp": "2025-08-03T23:06:18.953098"
+    }
+  ]
+}
